@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+            transition: color 0.5s;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #007bff;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button#stop {
+            background-color: #dc3545;
+        }
+
+        button#stop:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="heading">Color changes every two seconds</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+    <script>
+        let colors = ['red', 'blue', 'green', 'orange', 'purple', 'pink'];
+        let index = 0;
+        let intervalId;
+
+        document.getElementById('start').addEventListener('click', function() {
+            if (!intervalId) {
+                intervalId = setInterval(() => {
+                    document.body.style.backgroundColor = colors[index];
+                    index = (index + 1) % colors.length;
+                }, 500);
+            }
+        });
+
+        document.getElementById('stop').addEventListener('click', function() {
+            clearInterval(intervalId);
+            intervalId = null;
+        });
+    </script>
+</body>
+</html>
