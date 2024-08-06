@@ -4,24 +4,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios'
 function App() {
-  const [products, setProducts] = useState([])
-  const [error, setError] = useState(false)
+const [products,error]=customReactQuery('/api/products')
 
-  useEffect(() => {
-    ; (async () => {
-      try {
-        setError(false)
-        const response = await axios.get('http://localhost:5173/api/products')
-        setProducts(response.data)
-        console.log(response.data)
-      } catch (error) {
+ 
 
-        setError(true)
-
-      }
-    })()
-  }, [])
-
+ 
   if (error) {
     return <h1>Something went wrong</h1>
   }
@@ -40,3 +27,22 @@ function App() {
 
 export default App
 
+const customReactQuery=(urlPath)=>{
+  const [products, setProducts] = useState([])
+  const [error, setError] = useState(false)
+  useEffect(() => {
+    ; (async () => {
+      try {
+        setError(false)
+        const response = await axios.get(urlPath)
+        setProducts(response.data)
+        console.log(response.data)
+      } catch (error) {
+
+        setError(true)
+
+      }
+    })()
+  }, [])
+  return[products,error]
+}
