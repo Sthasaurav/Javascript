@@ -25,7 +25,7 @@ app.get('/api/products', (req, res) => {
     { id: 3, name: 'cup', price: 300 },
   ];
   if (req.query.search){
-    const filterProducts=product.filter(product=>
+    const filterProducts=products.filter(product=>
         product.name.include(req/query.search)
     )
     res.send(filterProducts);
